@@ -1,0 +1,11 @@
+@import 'colors';
+
+.ui {
+  &.main.container {
+    padding-top: 7em;
+  }
+
+  &.inverted.menu {
+    background-color: $primary-color;
+  }
+}

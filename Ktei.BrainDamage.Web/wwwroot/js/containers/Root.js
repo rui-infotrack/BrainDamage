@@ -10,11 +10,9 @@ export default class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
-          <ReduxRouter>
-            {routes}
-          </ReduxRouter>
-        </div>
+        <ReduxRouter>
+          {routes}
+        </ReduxRouter>
       </Provider>
     );
   }

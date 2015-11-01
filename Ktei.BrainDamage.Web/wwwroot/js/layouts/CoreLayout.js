@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import TopNav from 'components/TopNav';
 
 export default class CoreLayout extends React.Component {
   static propTypes = {
@@ -9,8 +9,8 @@ export default class CoreLayout extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <Link to='/feature'>Feature</Link>
+        <TopNav />
+        <div className="ui main container">
           {this.props.children}
         </div>
       </div>
