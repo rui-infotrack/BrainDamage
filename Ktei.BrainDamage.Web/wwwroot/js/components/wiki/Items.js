@@ -1,14 +1,19 @@
 import React from 'react';
+import MarkdownView from './MarkdownView';
 
 export default ({ items }) => {
   return (
-    <div className="ui relaxed divided list">
+    <div className="ui divided items">
       {items.map(x => (
         <div className="item" key={x.id}>
-          <i className="large file text outline middle aligned icon"></i>
           <div className="content">
             <a className="header">{x.title}</a>
-            <div className="description">{x.updatedAt}</div>
+            <div className="extra">
+              {x.updatedAt}
+            </div>
+            <div className="description">
+              <MarkdownView markdown={x.content} />
+            </div>
           </div>
         </div>
       ))}

@@ -7,14 +7,17 @@ const defaultState = {
   items: [{
     id: 1,
     title: 'Fallout is coming out!',
+    content: 'this is content',
     updatedAt: '5 minutes ago'
   }, {
     id: 2,
     title: 'InfoTrack is winning!',
+    content: '```public class```',
     updatedAt: '2 days ago'
   }, {
     id: 3,
     title: 'Fargo is fantastic!',
+    content: 'this is content',
     updatedAt: '1 day ago'
   }]
 };
