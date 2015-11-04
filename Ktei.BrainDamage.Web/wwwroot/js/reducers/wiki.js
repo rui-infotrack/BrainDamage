@@ -8,17 +8,20 @@ const defaultState = {
     id: 1,
     title: 'Fallout is coming out!',
     content: 'this is content',
-    updatedAt: '5 minutes ago'
+    updatedAt: '5 minutes ago',
+    labels: [1]
   }, {
     id: 2,
     title: 'InfoTrack is winning!',
     content: '```public class```',
-    updatedAt: '2 days ago'
+    updatedAt: '2 days ago',
+    labels: []
   }, {
     id: 3,
     title: 'Fargo is fantastic!',
     content: 'this is content',
-    updatedAt: '1 day ago'
+    updatedAt: '1 day ago',
+    labels: [2]
   }]
 };
 

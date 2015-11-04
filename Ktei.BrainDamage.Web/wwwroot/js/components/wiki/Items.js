@@ -1,10 +1,15 @@
 import React from 'react';
 import MarkdownView from './MarkdownView';
 
-export default ({ items }) => {
+function filterByLabel(item, labelId) {
+  const { labels } = item;
+  return labels.indexOf(labelId) >= 0 || labelId === -1;
+}
+
+export default ({ items, activeLabelId }) => {
   return (
     <div className="ui divided items">
-      {items.map(x => (
+      {items.filter(x => filterByLabel(x, activeLabelId)).map(x => (
         <div className="item" key={x.id}>
           <div className="content">
             <a className="header">{x.title}</a>

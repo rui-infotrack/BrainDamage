@@ -29,7 +29,7 @@ export default class Index extends React.Component {
           activeLabelId={activeLabelId}
           selectFilter={selectFilter}
         />
-        <Items items={items} />
+        <Items items={items} activeLabelId={activeLabelId} />
       </div>
     );
   }
