@@ -8,10 +8,11 @@ import {
 import setState from './setState';
 
 const defaultState = {
-  activeLabelId: -1,
+  loading: false,
+  loaded: false,
   labels: [],
   items: [],
-  loading: false
+  activeLabelId: -1
 };
 
 export default createReducer(defaultState, {
@@ -26,7 +27,8 @@ export default createReducer(defaultState, {
     return setState(state, {
       labels,
       items,
-      loading: false
+      loading: false,
+      loaded: true
     });
   },
 

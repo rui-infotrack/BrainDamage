@@ -7,10 +7,12 @@ export default () => (
       <Link to="/" className="header item">
         Brain Damage
       </Link>
-      <Link to="/" className="item">Wiki</Link>
-      <Link to="/feature" className="item">Feature</Link>
+      <div className="ui simple dropdown item">
+        <Link to="/">Wiki <i className="dropdown icon"></i></Link>
+        <div className="menu">
+          <Link to="/wiki/create" className="item">New Item</Link>
+        </div>
+      </div>
     </div>
   </div>
 );
-
-

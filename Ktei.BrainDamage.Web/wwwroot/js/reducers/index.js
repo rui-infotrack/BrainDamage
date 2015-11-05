@@ -1,8 +1,10 @@
 import { combineReducers }    from 'redux';
 import { routerStateReducer } from 'redux-router';
-import { default as wiki } from './wiki';
+import wikiIndex from './wikiIndex';
+import wikiCreate from './wikiCreate';
 
 export default combineReducers({
   router: routerStateReducer,
-  wiki
+  wikiIndex,
+  wikiCreate
 });

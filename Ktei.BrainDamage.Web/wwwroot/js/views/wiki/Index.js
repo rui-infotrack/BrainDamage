@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import CreateButton from 'components/wiki/CreateButton';
 import Filters from 'components/wiki/Filters';
 import Items from 'components/wiki/Items';
 import {
@@ -8,8 +7,10 @@ import {
   selectFilter
 } from 'actions/WikiActions';
 
-export default class Index extends React.Component {
+class Index extends React.Component {
   static propTypes = {
+    loading: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
     labels: PropTypes.array.isRequired,
     activeLabelId: PropTypes.number.isRequired,
     items: PropTypes.array.isRequired,
@@ -18,9 +19,11 @@ export default class Index extends React.Component {
   };
 
   componentDidMount() {
-    const { loadWiki } = this.props;
+    const { loaded, loadWiki } = this.props;
 
-    loadWiki();
+    if (!loaded) {
+      loadWiki();
+    }
   }
 
   render() {
@@ -41,7 +44,6 @@ export default class Index extends React.Component {
     return (
       <div>
         <h1>Damaged Wiki</h1>
-        <CreateButton />
         <Filters
           labels={labels}
           activeLabelId={activeLabelId}
@@ -54,13 +56,14 @@ export default class Index extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { wiki } = state;
+  const { wikiIndex: { loading, loaded, labels, activeLabelId, items } } = state;
 
   return {
-    loading: wiki.loading,
-    labels: wiki.labels,
-    activeLabelId: wiki.activeLabelId,
-    items: wiki.items
+    loading,
+    loaded,
+    labels,
+    activeLabelId,
+    items
   };
 }
 
