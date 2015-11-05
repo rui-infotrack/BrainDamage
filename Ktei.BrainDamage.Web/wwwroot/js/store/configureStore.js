@@ -8,27 +8,16 @@ import {
   compose,
   createStore
 } from 'redux';
-
-const logger = store => next => action => {
-  if (window.reduxTracing) {
-    window.console.group(action.type);
-    window.console.info('dispatching', action);
-    let result = next(action);
-    window.console.log('next state', store.getState());
-    window.console.groupEnd(action.type);
-    return result;
-  }
-  return next(action);
-};
+import callAPI from './callAPI';
+import logger from './logger';
 
 export default () => {
   let createStoreWithMiddleware;
 
-  const middleware = applyMiddleware(thunk, logger);
-
   createStoreWithMiddleware = compose(
-    middleware,
-    reduxReactRouter({ routes, createHistory })
+    applyMiddleware(thunk, callAPI),
+    reduxReactRouter({ routes, createHistory }),
+    applyMiddleware(logger)
   );
 
   const store = createStoreWithMiddleware(createStore)(

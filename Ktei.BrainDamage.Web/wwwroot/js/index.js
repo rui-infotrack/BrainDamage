@@ -3,6 +3,8 @@ require('../sass/app.scss');
 
 require('semantic');
 
+window.reduxTracing = false;
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from 'containers/Root';

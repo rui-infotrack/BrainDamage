@@ -1,0 +1,29 @@
+{
+  "wiki": {
+    "labels": [
+      { "id": -1, "text": "All" },
+      { "id": 1, "text": "Mortal Kombat" },
+      { "id": 2, "text": "Work" }
+    ],
+
+    "items": [{
+      "id": 1,
+      "title": "Fallout is coming out!",
+      "content": "An h1 header Paragraphs are separated by a blank line.2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists",
+      "updatedAt": "5 minutes ago",
+      "labels": [1]
+    }, {
+      "id": 2,
+      "title": "Fallout is coming out!",
+      "content": "this is content",
+      "updatedAt": "5 minutes ago",
+      "labels": []
+    }, {
+      "id": 3,
+      "title": "Fallout is coming out!",
+      "content": "this is content",
+      "updatedAt": "5 minutes ago",
+      "labels": [2]
+    }]
+  }
+}

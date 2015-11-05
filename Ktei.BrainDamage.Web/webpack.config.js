@@ -73,6 +73,7 @@ module.exports = {
     },
     hot: true,
     proxy: {
+      '/api/*': 'http://localhost:3000'
       // '/v1/*': 'http://localhost:24957',
       // '/images/*': 'http://localhost:24957',
       // '/fonts/*': 'http://localhost:24957'

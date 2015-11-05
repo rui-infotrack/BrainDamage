@@ -1,35 +1,39 @@
 import createReducer from 'utils/createReducer';
-import { WIKI_SELECT_FILTER } from 'constants/ActionTypes';
+import {
+  WIKI_LOAD_REQUEST,
+  WIKI_LOAD_SUCCESS,
+  WIKI_LOAD_FAILURE,
+  WIKI_SELECT_FILTER
+} from 'constants/ActionTypes';
+import setState from './setState';
 
 const defaultState = {
   activeLabelId: -1,
-  labels: [{ id: -1, text: 'All' }, { id: 1, text: 'Some' }, { id: 2, text: 'Overall' }],
-  items: [{
-    id: 1,
-    title: 'Fallout is coming out!',
-    content: 'this is content',
-    updatedAt: '5 minutes ago',
-    labels: [1]
-  }, {
-    id: 2,
-    title: 'InfoTrack is winning!',
-    content: '```public class```',
-    updatedAt: '2 days ago',
-    labels: []
-  }, {
-    id: 3,
-    title: 'Fargo is fantastic!',
-    content: 'this is content',
-    updatedAt: '1 day ago',
-    labels: [2]
-  }]
+  labels: [],
+  items: [],
+  loading: false
 };
 
 export default createReducer(defaultState, {
+  [WIKI_LOAD_REQUEST](state) {
+    return setState(state, {
+      loading: true
+    });
+  },
+
+  [WIKI_LOAD_SUCCESS](state, action) {
+    const { response: { items, labels } } = action;
+    return setState(state, {
+      labels,
+      items,
+      loading: false
+    });
+  },
+
   [WIKI_SELECT_FILTER](state, action) {
     const { labelId } = action;
 
-    return Object.assign({}, state, {
+    return setState(state, {
       activeLabelId: labelId
     });
   }
