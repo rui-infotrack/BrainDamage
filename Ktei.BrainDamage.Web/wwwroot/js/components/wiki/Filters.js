@@ -1,9 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 
+const all = { id: -1, text: 'All' };
+
 export default ({ labels, activeLabelId, selectFilter }) => (
   <span className="ui labels">
-    {labels.map(x => (
+    {[all].concat(labels).map(x => (
       <a
         key={x.id}
         className={classnames('ui label', { teal: x.id == activeLabelId })}

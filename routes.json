@@ -1,3 +1,4 @@
 {
-  "/api/": "/"
+	"/api/wiki/labels": "/wikiLabels",
+  "/api/wiki": "/wiki"
 }

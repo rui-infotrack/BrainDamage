@@ -1,38 +1,74 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Form from 'components/wiki/Form';
+import {
+  loadWikiLabels,
+  updateNewItem
+} from 'actions/WikiActions';
 
 class Create extends React.Component {
-  componentDidMount() {
-    // const { loaded, loadWiki } = this.props;
+  static propTypes = {
+    labelsLoading: PropTypes.bool.isRequired,
+    labelsLoaded: PropTypes.bool.isRequired,
+    labels: PropTypes.array.isRequired,
+    newItem: PropTypes.object.isRequired,
+    loadWikiLabels: PropTypes.func.isRequired,
+    updateNewItem: PropTypes.func.isRequired
+  };
 
-    // if (!loaded) {
-    //   loadWiki();
-    // }
+  componentDidMount() {
+    const { labelsLoaded, loadWikiLabels } = this.props;
+
+    if (!labelsLoaded) {
+      loadWikiLabels();
+    }
   }
 
   render() {
+    const {
+      labelsLoaded,
+      labelsLoading,
+      labels,
+      newItem
+    } = this.props;
+
     return (
       <div>
         <h1>Create Wiki Item</h1>
+        <Form
+          labelsLoading={labelsLoading}
+          labelsLoaded={labelsLoaded}
+          labels={labels}
+          item={newItem}
+          onChange={this.handleChange.bind(this)}
+        />
       </div>
     );
+  }
+
+  handleChange(newItem) {
+    const { updateNewItem } = this.props;
+
+    updateNewItem(newItem);
   }
 }
 
 
 function mapStateToProps(state) {
-  // const { wiki } = state;
+  const { wikiCreate: { labelsLoading, labelsLoaded, labels, newItem } } = state;
 
   return {
-    // loading: wiki.loading,
-    // loaded: wiki.loaded,
-    // labels: wiki.labels
+    labelsLoading,
+    labelsLoaded,
+    labels,
+    newItem
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // loadWiki: () => dispatch(loadWiki())
+    loadWikiLabels: () => dispatch(loadWikiLabels()),
+    updateNewItem: (newItem) => dispatch(updateNewItem(newItem))
   };
 }
 
