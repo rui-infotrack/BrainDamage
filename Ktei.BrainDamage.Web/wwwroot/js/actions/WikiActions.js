@@ -38,14 +38,15 @@ export function saveItem(item) {
     const { labels, items } = state.wikiIndex;;
     const type = item.id > 0 ? 'PUT' : 'POST';
     item.id = items.length + 2;
-    item.updatedAt = 'just now';
+    item.updatedAt = new Date().toISOString();
     const func = () => {
       return {
         types: [WIKI_SAVE_ITEM_REQUEST, WIKI_SAVE_ITEM_SUCCESS, WIKI_SAVE_ITEM_FAILURE],
         callAPI: () => post(
           '/api/wiki/items',
           { labels, items: items.concat(item) }
-        )
+        ),
+        redirect: '/wiki'
       };
     };
     dispatch(func());

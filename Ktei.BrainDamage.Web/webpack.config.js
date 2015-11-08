@@ -47,7 +47,8 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('./wwwroot/dist/bundle.css')
+    new ExtractTextPlugin('./wwwroot/dist/bundle.css'),
+    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/])
   ],
   resolve: {
     alias: {

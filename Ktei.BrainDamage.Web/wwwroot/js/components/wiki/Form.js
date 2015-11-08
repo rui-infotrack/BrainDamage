@@ -1,6 +1,7 @@
 import React from 'react';
 import LabelsChooser from 'components/wiki/LabelsChooser';
 import ContentEditor from 'components/wiki/ContentEditor';
+import classnames from 'classnames';
 
 export default class Form extends React.Component {
   componentDidMount() {
@@ -51,7 +52,7 @@ export default class Form extends React.Component {
         </div>
         <button
           type="submit"
-          className="ui teal button"
+          className={classnames('ui teal button', { loading: busy })}
           tabIndex="0"
           disabled={busy}
         >

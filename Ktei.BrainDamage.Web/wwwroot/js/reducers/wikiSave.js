@@ -52,7 +52,6 @@ export default createReducer(defaultState, {
 
   [WIKI_SAVE_ITEM_SUCCESS](state, action) {
     const { response } = action;
-    console.log(response);
     return setState(state, {
       busy: false
     });

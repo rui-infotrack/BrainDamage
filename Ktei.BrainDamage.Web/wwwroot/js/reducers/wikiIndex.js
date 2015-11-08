@@ -3,7 +3,8 @@ import {
   WIKI_LOAD_REQUEST,
   WIKI_LOAD_SUCCESS,
   WIKI_LOAD_FAILURE,
-  WIKI_SELECT_FILTER
+  WIKI_SELECT_FILTER,
+  WIKI_SAVE_ITEM_SUCCESS
 } from 'constants/ActionTypes';
 import setState from './setState';
 
@@ -38,5 +39,11 @@ export default createReducer(defaultState, {
     return setState(state, {
       activeLabelId: labelId
     });
+  },
+
+  [WIKI_SAVE_ITEM_SUCCESS](state, action) {
+    const { response } = action;
+
+    return setState(state, response);
   }
 });

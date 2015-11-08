@@ -1,3 +1,5 @@
+import { pushState } from 'redux-router';
+
 export default function({ dispatch, getState }) {
   return function (next) {
     return function (action) {
@@ -5,7 +7,8 @@ export default function({ dispatch, getState }) {
         types,
         callAPI,
         shouldCallAPI = () => true,
-        payload = {}
+        payload = {},
+        redirect
       } = action;
 
       if (!types) {
@@ -36,14 +39,19 @@ export default function({ dispatch, getState }) {
       }));
 
       return callAPI().done(
-        response => dispatch(Object.assign({}, payload, {
-          response: response,
-          type: successType
-        }))
+        response => {
+          dispatch(Object.assign({}, payload, {
+            response,
+            type: successType
+          }));
+          if (redirect) {
+            dispatch(pushState(null, redirect));
+          }
+        }
       )
       .error(
         error => dispatch(Object.assign({}, payload, {
-          error: error,
+          error,
           type: failureType
         }))
       );

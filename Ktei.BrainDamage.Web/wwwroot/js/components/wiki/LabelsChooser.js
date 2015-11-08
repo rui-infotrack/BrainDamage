@@ -16,7 +16,8 @@ export default class LabelsChooser extends React.Component {
   }
 
   labels() {
-    return Object.keys(this.state.selectedLabelIds);
+    return Object.keys(this.state.selectedLabelIds)
+      .map(x => parseInt(x, 10));
   }
 
   render() {
