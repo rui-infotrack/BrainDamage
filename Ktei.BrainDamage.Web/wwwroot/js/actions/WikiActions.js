@@ -35,8 +35,9 @@ export const updateNewItem = createAction(WIKI_UPDATE_NEW_ITEM, 'newItem');
 export function saveItem(item) {
   return (dispatch, getState) => {
     const state = getState();
-    const { labels, items } = state.wikiIndex;;
-    const type = item.id > 0 ? 'PUT' : 'POST';
+    const { labels, items } = state.wikiIndex;
+    const isNew = !item.id;
+    const type = isNew ? 'PUT' : 'POST';
     item.id = items.length + 2;
     item.updatedAt = new Date().toISOString();
     const func = () => {
@@ -46,6 +47,7 @@ export function saveItem(item) {
           '/api/wiki/items',
           { labels, items: items.concat(item) }
         ),
+        payload: { isNew },
         redirect: '/wiki'
       };
     };

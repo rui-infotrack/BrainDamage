@@ -51,7 +51,16 @@ export default createReducer(defaultState, {
   },
 
   [WIKI_SAVE_ITEM_SUCCESS](state, action) {
-    const { response } = action;
+    const { response, isNew } = action;
+    if (isNew) {
+      state = setState(state, {
+        newItem: {
+          title: '',
+          labels: [],
+          content: ''
+        }
+      });
+    }
     return setState(state, {
       busy: false
     });
