@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Filters from 'components/wiki/Filters';
 import Items from 'components/wiki/Items';
 import {
-  loadWiki,
+  load,
   selectFilter
 } from 'actions/WikiActions';
 
@@ -15,14 +15,14 @@ class Index extends React.Component {
     activeLabelId: PropTypes.number.isRequired,
     items: PropTypes.array.isRequired,
     selectFilter: PropTypes.func.isRequired,
-    loadWiki: PropTypes.func.isRequired
+    load: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    const { loaded, loadWiki } = this.props;
+    const { loaded, load } = this.props;
 
     if (!loaded) {
-      loadWiki();
+      load();
     }
   }
 
@@ -69,7 +69,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadWiki: () => dispatch(loadWiki()),
+    load: () => dispatch(load()),
     selectFilter: (x) => dispatch(selectFilter(x))
   };
 }

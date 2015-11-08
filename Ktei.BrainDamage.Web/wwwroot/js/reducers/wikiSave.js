@@ -2,7 +2,9 @@ import createReducer from 'utils/createReducer';
 import {
   WIKI_LOAD_LABELS_REQUEST,
   WIKI_LOAD_LABELS_SUCCESS,
-  WIKI_UPDATE_NEW_ITEM
+  WIKI_UPDATE_NEW_ITEM,
+  WIKI_SAVE_ITEM_REQUEST,
+  WIKI_SAVE_ITEM_SUCCESS
 } from 'constants/ActionTypes';
 import setState from './setState';
 
@@ -14,7 +16,8 @@ const defaultState = {
     title: '',
     labels: [],
     content: ''
-  }
+  },
+  busy: false
 };
 
 export default createReducer(defaultState, {
@@ -37,6 +40,21 @@ export default createReducer(defaultState, {
     const { newItem } = action;
     return setState(state, {
       newItem
+    });
+  },
+
+  [WIKI_SAVE_ITEM_REQUEST](state, action) {
+    const { item } = action;
+    return setState(state, {
+      busy: true
+    });
+  },
+
+  [WIKI_SAVE_ITEM_SUCCESS](state, action) {
+    const { response } = action;
+    console.log(response);
+    return setState(state, {
+      busy: false
     });
   }
 });

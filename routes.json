@@ -1,4 +1,4 @@
 {
 	"/api/wiki/labels": "/wikiLabels",
-  "/api/wiki": "/wiki"
+  "/api/wiki/items": "/wikiIndex"
 }

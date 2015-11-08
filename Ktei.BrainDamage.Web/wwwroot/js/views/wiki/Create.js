@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Form from 'components/wiki/Form';
 import {
-  loadWikiLabels,
-  updateNewItem
+  loadLabels,
+  updateNewItem,
+  saveItem
 } from 'actions/WikiActions';
 
 class Create extends React.Component {
@@ -12,15 +13,17 @@ class Create extends React.Component {
     labelsLoaded: PropTypes.bool.isRequired,
     labels: PropTypes.array.isRequired,
     newItem: PropTypes.object.isRequired,
-    loadWikiLabels: PropTypes.func.isRequired,
-    updateNewItem: PropTypes.func.isRequired
+    loadLabels: PropTypes.func.isRequired,
+    updateNewItem: PropTypes.func.isRequired,
+    saveItem: PropTypes.func.isRequired,
+    busy: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
-    const { labelsLoaded, loadWikiLabels } = this.props;
+    const { labelsLoaded, loadLabels } = this.props;
 
     if (!labelsLoaded) {
-      loadWikiLabels();
+      loadLabels();
     }
   }
 
@@ -29,18 +32,22 @@ class Create extends React.Component {
       labelsLoaded,
       labelsLoading,
       labels,
-      newItem
+      newItem,
+      busy
     } = this.props;
 
     return (
       <div>
         <h1>Create Wiki Item</h1>
         <Form
+          ref="form"
           labelsLoading={labelsLoading}
           labelsLoaded={labelsLoaded}
           labels={labels}
           item={newItem}
           onChange={this.handleChange.bind(this)}
+          onSubmit={this.handleSubmit.bind(this)}
+          busy={busy}
         />
       </div>
     );
@@ -51,24 +58,39 @@ class Create extends React.Component {
 
     updateNewItem(newItem);
   }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const item = this.refs.form.item();
+    const { saveItem } = this.props;
+    saveItem(item);
+  }
 }
 
-
 function mapStateToProps(state) {
-  const { wikiCreate: { labelsLoading, labelsLoaded, labels, newItem } } = state;
+  const { wikiSave: {
+    labelsLoading,
+    labelsLoaded,
+    labels,
+    newItem,
+    busy
+  } } = state;
 
   return {
     labelsLoading,
     labelsLoaded,
     labels,
-    newItem
+    newItem,
+    busy
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadWikiLabels: () => dispatch(loadWikiLabels()),
-    updateNewItem: (newItem) => dispatch(updateNewItem(newItem))
+    loadLabels: () => dispatch(loadLabels()),
+    updateNewItem: (newItem) => dispatch(updateNewItem(newItem)),
+    saveItem: (item) => dispatch(saveItem(item))
   };
 }
 

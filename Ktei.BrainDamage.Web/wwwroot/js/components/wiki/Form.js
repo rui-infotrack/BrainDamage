@@ -12,11 +12,13 @@ export default class Form extends React.Component {
       labels,
       labelsLoading,
       labelsLoaded,
-      item
+      item,
+      onSubmit,
+      busy
      } = this.props;
 
     return (
-      <form className="ui form">
+      <form className="ui form" onSubmit={onSubmit}>
         <h4 className="ui dividing header">Title:</h4>
         <div className="field">
           <input
@@ -47,7 +49,14 @@ export default class Form extends React.Component {
             defaultContent={item.content}
           />
         </div>
-        <div className="ui teal button" tabIndex="0">Save</div>
+        <button
+          type="submit"
+          className="ui teal button"
+          tabIndex="0"
+          disabled={busy}
+        >
+          Save
+        </button>
       </form>
     );
   }
